@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+<main class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 mt-5">
+        <h1>crear filiacion</h1>
+
+        {{error}}
+        <form action="/filiacion/create/" method="POST">
+            {% csrf_token %}
+            {{form}}
+             <button>Grabar</button>
+        </form>
+
+        </div> 
+    </div>
+</main>
+
+{% endblock %}

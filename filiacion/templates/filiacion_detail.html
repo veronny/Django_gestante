@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{{ error }}
+
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>
+        Update
+    </button>
+</form>
+
+ 
+  <form action="{% url 'delete_filiacion' filiacion.id %}" method="POST">
+    {% csrf_token %}
+    <button>
+      delete
+    </button>
+  </form>
+  
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<main class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 mt-5">
+      <h1>Filiacion</h1>
+
+      <table id="table" class="table">
+          <thead>
+            <tr>
+              <th>Num Doc</th>
+              <th>HC</th>
+              <th>Apellido Paterno</th>
+              <th>Apellido Materno</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for filiacion in filiaciones %}
+              <tr>
+                <td>{{ filiacion.numero_documento }}</td>
+                <td>{{ filiacion.historia_clinica }}</td>
+                <td>{{ filiacion.apellido_paterno }}</td>
+
+
+                  <td>
+                      <a href="{% url 'filiacion_detail' filiacion.id %}">
+                      {{ filiacion.apellido_materno }}
+                      </a>
+                  </td>
+                
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div> 
+  </div>
+</main>
+
+{% endblock %}
