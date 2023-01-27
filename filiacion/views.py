@@ -5,15 +5,12 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 
-
 # Create your views here.
 from .forms import FiliacionForm
 from .models import Filiacion
 
-
 def home(request):
     return render(request, 'home.html')
-
 
 def signup(request):
     if request.method == 'GET':

@@ -1,22 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{{ error }}
-
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button>
-        Update
-    </button>
-</form>
-
- 
-  <form action="{% url 'delete_filiacion' filiacion.id %}" method="POST">
-    {% csrf_token %}
-    <button>
-      delete
-    </button>
-  </form>
-  
+<main class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 text-center py-1">
+      <h1>Actualizar Responsable</h1>
+    </div>
+    <div class="col-md-6 offset-md-3">
+      {{ error }}
+      <section class="card card-body">
+        <div class="row">
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-success btn-sm">
+                  Actualizar Responsable
+                </button>
+            </form>
+          </div>
+        </br>
+        <div class="row">
+            <form action="{% url 'delete_filiacion' filiacion.id %}" method="POST">
+              {% csrf_token %}
+              <button class="btn btn-danger btn-sm">
+                Eliminar Responsable
+              </button>
+            </form>
+          </div>
+        </div>  
+      </section>
+    </div>
+  </div>
+</main>
 {% endblock %}

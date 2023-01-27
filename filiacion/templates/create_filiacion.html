@@ -4,16 +4,19 @@
     
 <main class="container">
     <div class="row">
-      <div class="col-md-6 offset-md-3 mt-5">
-        <h1>crear filiacion</h1>
-
+      <div class="col-md-6 offset-md-3 text-center py-1">
+        <h1>Crear Responsable de Directorio</h1>
+      </div>
+      <div class="col-md-6 offset-md-3">
         {{error}}
-        <form action="/filiacion/create/" method="POST">
-            {% csrf_token %}
-            {{form}}
-             <button>Grabar</button>
-        </form>
-
+        <section class="card card-body">
+          <form action="/filiacion/create/" method="POST">
+              {% csrf_token %}
+              {{form}}
+              </br>
+              <button class="btn btn-success"><i class="fa fa-save"></i> Grabar</button>
+          </form>
+        </section>
         </div> 
     </div>
 </main>

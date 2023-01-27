@@ -1,22 +1,132 @@
 {% extends 'base.html' %} 
+{% load static %}
 {% block content %}
 
-<main class="container py-5">
+<main class="container">
+  <!-- Pagina de Inicio
   <section class="card card-body">
-    <h1 class="display-1 text-center">Django App</h1>
+    <h1 class="display-1 text-center">Padron Nominal App</h1>
     <p>Padron Gestante</p>
 
     <div class="text-center">
-      <a class="btn btn-secondary" href="/signin">
-        Ingresar
-      </a>
-      <a class="btn btn-dark" href="/signup">
-        Crear Usuario
-      </a>
-
+      <a class="btn btn-secondary" href="/signin"> Ingresar </a>
+      <a class="btn btn-dark" href="/signup"> Crear Usuario </a>
     </div>
   </section>
+  -->
+  <div class="container px-4 px-lg-5">
+    <!-- Heading Row   https://dummyimage.com/900x400/dee2e6/6c757d.jpg -->
+    <div class="row gx-4 gx-lg-5 align-items-center my-5">
+      <div class="col-lg-7">
+        <img class="img-fluid rounded mb-4 mb-lg-0" src="{% static 'img/banner_padron_nominal.png' %}" alt="..."/>
+      </div>
+      <div class="col-lg-5">
+        <h2 class="font-weight-light">Sistema de Padrón Nominal en la Region Junin</h2>
+        <p class="text-justify">
+          Es una herramienta que permite realizar un registro en linea de niños y niñas 
+          menores de 6 años y verifica en tiempo real su identidad, manteniendo su
+          registro actualizado, y facilitando su verificacion a nivel local.
+        </p>
+        <a class="btn btn-primary" href="https://padronnominal.reniec.gob.pe/padronn/" target="_blank">Ingresa al sistema</a>
+      </div>
+    </div>
+    <!-- Call to Action-->
+    <div class="card text-white bg-success my-5 py-4 text-center">
+      <div class="card-body">
+        <h5 class="text-white m-0">
+          Sigue los pasos para crear usuarios y claves del sistema de padrón nominal haciendo <a class="btn btn-warning">Click aquí</a>
+        </h5>
+      </div>
+    </div>
+    <!-- Content Row-->
+    <div class="row gx-4 gx-lg-5">
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Normatividad</h2>
+            <p class="card-text">
+              Es necesario revisar las normativas emitidas, como la Resolución Ministerial 
+              N° 389-2017-MINSA y la Resolución Directoral N° 1002-2020-DRSJ-OEGDRH
+            </p>
+          </div>
+          <div class="card-footer">
+            <a class="btn btn-primary btn-sm" href="#!">Más información</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Directorio</h2>
+            <p class="card-text">
+              Directorio actualizado de los encargados de homologación y actualización 
+              del padrón nominal en municipios y establecimientos de salud.
+            </p>
+          </div>
+          <div class="card-footer text-center">
+            <a class="btn btn-primary btn-sm" href="#!">Municipio</a>
+            <a class="btn btn-primary btn-sm" href="#!">Establecimiento de Salud</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Indicadores</h2>
+            <p class="card-text">
+              Revisa los tableros de seguimiento para apoyar el cumplimiento del 
+              Sello Municipal, Meta 4, variables priorizadas por la DIRESA, entre otros 
+            </p>
+          </div>
+          <div class="card-footer text-right">
+            <a class="btn btn-primary btn-sm" href="/signin">Ingresar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row gx-4 gx-lg-5">
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Informes mensuales</h2>
+            <p class="card-text">
+              <li>Ranking Municipios</li>
+              <li>Reporte de Actas</li>
+              <li>Formatos MINSA</li>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Herramientas MINSA</h2>
+            <p class="card-text">
+              <li>Pagina web Padron Nominal </li>
+              <li>Tablero MINSA</li>
+              <li>HIS MINSA</li>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Contacto Diresa</h2>
+            <p class="card-text">
+              Ing Veronny Morales Castillo
+              Celular 942908070
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </main>
-
-
+<footer>
+  {% include '_footer.html' %}
+</footer>
 {% endblock %}
+
