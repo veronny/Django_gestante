@@ -118,3 +118,11 @@ def distrito(request):
                 'is_htmx': True 
                 }
     return render(request, 'partials/distritos.html', context)
+
+# ----- FRONTEND FILIACION --------------------
+def frontend_filiacion(request):
+    filiaciones = Filiacion.objects.all()
+    context = {
+            'filiaciones': filiaciones,
+            }
+    return render(request, 'frontend/filiacion.html', context)

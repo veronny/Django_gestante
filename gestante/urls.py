@@ -19,6 +19,10 @@ urlpatterns = [
     
     path('logout/', views.signout, name='logout'),
     path('signin/', views.signin, name='signin'),
+    
+    #frontend routes
+    path('frontend_filiacion/', views.frontend_filiacion, name='frontend_filiacion'),
+    
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
