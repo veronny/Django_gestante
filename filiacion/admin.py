@@ -6,19 +6,7 @@ from .models import Filiacion, Red, Microred, Establecimiento, Provincia, Distri
 
 # Register your models here.
 
-@admin.register(Filiacion)
-class FiliacionAdmin(admin.ModelAdmin):
-    list_display = (
-        'documento_identidad',
-        'apellido_paterno',
-        'apellido_materno',
-        'nombres',
-        'telefono',
-        'correo_electronico',
-    )
-    search_fields = ('nombres',)
-
-# Red
+#------------Red---------------------------------
 class RedResources(resources.ModelResource):
     class Meta:
         model = Red
@@ -36,7 +24,7 @@ class RedAdmin(ImportExportModelAdmin,admin.ModelAdmin):
 # Red
 admin.site.register(Microred)
 
-# Establecimiento
+#-----------Establecimiento--------------------
 class EstablecimientoResources(resources.ModelResource):
     class Meta:
         model = Establecimiento
@@ -53,7 +41,7 @@ class EstablecimientoAdmin(ImportExportModelAdmin,admin.ModelAdmin):
     )
     search_fields = ('nombre_establecimiento',)
     
-# Provincia  
+#---------Provincia----------------------------  
 class ProvinciaResources(resources.ModelResource):
     class Meta:
         model = Provincia
@@ -67,7 +55,7 @@ class ProvinciaAdmin(ImportExportModelAdmin,admin.ModelAdmin):
     )
     search_fields = ('nombre_provincia',)
 
-# Distrito
+#------------ Distrito--------------------------
 class DistritoResources(resources.ModelResource):
     class Meta:
         model = Distrito
@@ -82,3 +70,26 @@ class DistritoAdmin(ImportExportModelAdmin,admin.ModelAdmin):
         'provincia',
     )
     search_fields = ('nombre_distrito',)
+    
+    
+#--------------DIRECTORIO DE MUNICIPIO --------------------------
+class FiliacionResources(resources.ModelResource):
+    class Meta:
+        model = Filiacion
+
+@admin.register(Filiacion)
+class FiliacionAdmin(ImportExportModelAdmin,admin.ModelAdmin):
+    resource_class = FiliacionResources
+    list_display = (
+        'provincia',
+        'distrito',
+        'documento_identidad',
+        'apellido_paterno',
+        'apellido_materno',
+        'nombres',
+        'telefono',
+        'correo_electronico',
+        'condicion',
+        'cuenta_usuario'
+    )
+    search_fields = ('nombres',)

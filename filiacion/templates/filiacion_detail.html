@@ -10,7 +10,7 @@
       {{ error }}
       <section class="card card-body">
         <div class="row">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form.as_p}}
                 <button class="btn btn-success btn-sm">
@@ -20,7 +20,7 @@
           </div>
         </br>
         <div class="row">
-            <form action="{% url 'delete_filiacion' filiacion.id %}" method="POST">
+            <form action="{% url 'delete_filiacion' filiacion.id %}" method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               <button class="btn btn-danger btn-sm">
                 Eliminar Responsable

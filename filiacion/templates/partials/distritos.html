@@ -1,0 +1,17 @@
+<select class="custom-select mb-4"
+    name="redes_selected"
+    hx-get="{% url 'atendidos_microredes' %}"
+    hx-trigger="change"
+    hx-target="#microredes">
+    <option select>Seleccione la RED</option>
+      
+    {% for red in redes %}
+        <option value="{{ red.cod_enlace }}">{{ red.nombre_red }}</option>
+    {% endfor %}
+</select>
+
+{% if request.htmx %}
+<div id="establecimientos" class="my-4" hx-swap-oob="true">
+    {% include 'atendidos/partials/establecimientos.html' %}
+</div>
+{% endif %}

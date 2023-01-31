@@ -10,14 +10,14 @@
       <div class="col-md-6 offset-md-3">
         {{error}}
         <section class="card card-body">
-          <form action="/filiacion/create/" method="POST">
+          <form action="/filiacion/create/" method="POST"  enctype="multipart/form-data">
               {% csrf_token %}
-              {{form}}
+              {{ form }}
               </br>
               <button class="btn btn-success"><i class="fa fa-save"></i> Grabar</button>
           </form>
         </section>
-        </div> 
+      </div> 
     </div>
 </main>
 

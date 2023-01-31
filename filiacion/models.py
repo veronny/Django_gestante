@@ -30,25 +30,53 @@ class Distrito(models.Model):
     provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE, related_name='provincias', null=True, blank=True)  
     def __str__(self):
         return self.nombre_distrito
+
 # Create your models here.
+
+    
 class Filiacion(models.Model):
-    provincia = models.CharField(max_length=20,null=True, blank=True)
-    distrito = models.CharField(max_length=20,null=True, blank=True)
-    tipo_municipalidad = models.CharField(max_length=100,null=True, blank=True)
+    TIPO_MUNICIPALIDAD = [
+                ('Provincial', 'Provincial'),
+                ('Distrital', 'Distrital'),
+            ]
+    
+    PERFIL = [
+                ('Consultor', 'Consultor'),
+                ('Registrador', 'Registrador'),
+            ]
+  
+    CONDICION = [
+                    ('Alta', 'Alta'),
+                    ('Baja', 'Baja'),
+                ]
+
+    CUENTA_USUARIO = [
+                    ('Si', 'Si'),
+                    ('No', 'No'),
+                    ('Espera respuesta MINSA', 'Espera respuesta MINSA'),
+                ]
+    
+    provincia = models.CharField(max_length=100,null=True, blank=True)
+    distrito = models.CharField(max_length=100,null=True, blank=True)
+    tipo_municipalidad = models.CharField(choices=TIPO_MUNICIPALIDAD, max_length=100, null=True, blank=True)
     documento_identidad = models.CharField(max_length=100,null=True, blank=True)
     apellido_paterno = models.CharField(max_length=100,null=True, blank=True)
     apellido_materno = models.CharField(max_length=200,null=True, blank=True)
     nombres = models.CharField(max_length=200,null=True, blank=True)
     telefono = models.CharField(max_length=200,null=True, blank=True)
     correo_electronico = models.CharField(max_length=200,null=True, blank=True)
-    perfil = models.CharField(max_length=100,null=True, blank=True)
-    condicion = models.CharField(max_length=100,null=True, blank=True)
-    cuenta_usuario = models.CharField(max_length=100,null=True, blank=True)
+    perfil = models.CharField(choices=PERFIL,max_length=100,null=True, blank=True)
+    condicion = models.CharField(choices=CONDICION,max_length=100,null=True, blank=True)
+    cuenta_usuario = models.CharField(choices=CUENTA_USUARIO,max_length=100,null=True, blank=True)
     contraseña_usuario = models.CharField(max_length=100,null=True, blank=True)
-    req_oficio = models.CharField(max_length=100,null=True, blank=True)
-    req_resolucion = models.CharField(max_length=100,null=True, blank=True)
-    req_formato = models.CharField(max_length=100,null=True, blank=True)
-    req_generales_excel = models.CharField(max_length=100,null=True, blank=True)
+    req_oficio = models.FileField(upload_to="filiacion/oficio",null=True, blank=True)
+    dateTimeOfUpload_req_oficio = models.DateTimeField(auto_now = True,null=True, blank=True)
+    req_resolucion = models.FileField(upload_to="filiacion/resolucion/",null=True, blank=True)
+    dateTimeOfUpload_req_resolucion = models.DateTimeField(auto_now = True,null=True, blank=True)
+    req_formato = models.FileField(upload_to="filiacion/formato/",null=True, blank=True)
+    dateTimeOfUpload_req_formato = models.DateTimeField(auto_now = True,null=True, blank=True)
+    req_generales_excel = models.FileField(upload_to="filiacion/excel/",null=True, blank=True)
+    dateTimeOfUpload_generales_excel = models.DateTimeField(auto_now = True,null=True, blank=True)
     
     def __str__(self):
         return self.nombres
