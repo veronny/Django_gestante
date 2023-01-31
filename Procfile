@@ -1,0 +1,1 @@
+web: gunicorn gestante.wsgi:application --log-file -
