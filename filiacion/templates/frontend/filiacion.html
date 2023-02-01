@@ -9,7 +9,7 @@
   <div class="row">
     <div class="table-responsive">
       <table id="table_padron_municipal_frontend" class="table table-bordered table-hover table-striped">
-        <thead>
+        <thead class="text-center" style="font-size: 13px;">
           <tr>
             <th>Provincia</th>
             <th>Distrito</th>
@@ -18,28 +18,49 @@
             <th>Ap Paterno</th>
             <th>Ap Materno</th>
             <th>Nombres</th>
-            <th>Telf./Celular</th>
+            <th>Telf./ Celular</th>
             <th>Correo Electronico</th>
             <th>Perfil</th>
             <th>Condicion</th>
+            <th>Usuario</th>
           </tr>
         </thead>
-        <tbody>
-            {% for filiacion in filiaciones %}
-            <tr>
-              <td>{{ filiacion.provincia }}</td>
-              <td>{{ filiacion.distrito }}</td>
-              <td>{{ filiacion.tipo_municipalidad }}</td>
-              <td>{{ filiacion.documento_identidad }}</td>
-              <td>{{ filiacion.apellido_paterno }}</td>
-              <td>{{ filiacion.apellido_materno }}</td>
-              <td>{{ filiacion.nombres }}</td>
-              <td>{{ filiacion.telefono }}</td>
-              <td>{{ filiacion.correo_electronico }}</td>
-              <td>{{ filiacion.perfil }}</td>
-              <td>{{ filiacion.condicion }}</td>             
-            </tr>
-          {% endfor %}
+        <tbody class="text-center" style="font-size: 14px;">
+          {% for filiacion in filiaciones %}
+              <tr>
+                <td>{{ filiacion.provincia }}</td>
+                <td>{{ filiacion.distrito }}</td>
+                <td>{{ filiacion.tipo_municipalidad }}</td>
+                
+                <td class="text-primary">{{ filiacion.documento_identidad }}</td>
+                
+                <td class="text-primary">{{ filiacion.apellido_paterno }}</td>
+                <td class="text-primary">{{ filiacion.apellido_materno }}</td>
+                <td class="text-primary">{{ filiacion.nombres }}</td>
+                <td class="text-primary">{{ filiacion.telefono }}</td>
+                <td class="text-primary">{{ filiacion.correo_electronico }}</td>
+                <td class="text-primary">{{ filiacion.perfil }}</td>
+                {% if filiacion.condicion == "Alta" %}
+                <td>
+                  <span class="badge bg-success">{{ filiacion.condicion }}</span>
+                </td>
+                {% else %}
+                <td>
+                  <span class="badge bg-danger">{{ filiacion.condicion }}</span>
+                </td>
+                {% endif %}
+                
+                {% if filiacion.cuenta_usuario == "Si" %}
+                <td>
+                  <span class="badge bg-success">{{ filiacion.cuenta_usuario }}</span>
+                </td>
+                {% else %}
+                <td>
+                  <span class="badge bg-danger">{{ filiacion.cuenta_usuario }}</span>
+                </td>
+                {% endif %}  
+              </tr>
+            {% endfor %}
         </tbody>
       </table>
     </div>

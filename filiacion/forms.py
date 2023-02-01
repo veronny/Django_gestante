@@ -18,8 +18,6 @@ class FiliacionForm(forms.ModelForm):
                  'perfil', 
                  'condicion',
                  'cuenta_usuario',
-                 'req_oficio', 
-                 'req_resolucion',
                  'req_formato',
                  'req_generales_excel'
                 ]
@@ -37,8 +35,6 @@ class FiliacionForm(forms.ModelForm):
                 'perfil' : forms.Select(attrs={'class':'form-control'}),
                 'condicion' : forms.Select(attrs={'class':'form-control'}),
                 'cuenta_usuario' : forms.Select(attrs={'class':'form-control'}),
-                'req_oficio' : forms.ClearableFileInput(attrs={'class': 'form-control'}),
-                'req_resolucion' : forms.ClearableFileInput(attrs={'class': 'form-control'}),
                 'req_formato' : forms.ClearableFileInput(attrs={'class': 'form-control'}),
                 'req_generales_excel' : forms.ClearableFileInput(attrs={'class': 'form-control'}),
        }
