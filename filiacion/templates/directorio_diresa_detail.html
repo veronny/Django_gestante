@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 text-center py-1">
+      <h1>Actualizar Responsable</h1>
+    </div>
+    <div class="col-md-6 offset-md-3">
+      {{ error }}
+      <section class="card card-body">
+        <div class="row">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-success btn-sm">
+                  Actualizar Responsable
+                </button>
+            </form>
+          </div>
+        </br>
+      </section>
+    </div>
+  </div>
+</main>
+{% endblock %}

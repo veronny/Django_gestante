@@ -2,7 +2,7 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
 from django.contrib import admin
-from .models import Filiacion, Red, Microred, Establecimiento, Provincia, Distrito
+from .models import Filiacion, Red, Microred, Establecimiento, Provincia, Distrito, Directorio
 
 # Register your models here.
 
@@ -83,6 +83,27 @@ class FiliacionAdmin(ImportExportModelAdmin,admin.ModelAdmin):
     list_display = (
         'provincia',
         'distrito',
+        'documento_identidad',
+        'apellido_paterno',
+        'apellido_materno',
+        'nombres',
+        'telefono',
+        'correo_electronico',
+        'condicion',
+        'cuenta_usuario'
+    )
+    search_fields = ('nombres',)
+ 
+#--------------DIRECTORIO DE MUNICIPIO --------------------------
+class DirectorioResources(resources.ModelResource):
+    class Meta:
+        model = Directorio
+
+@admin.register(Directorio)
+class DirectorioAdmin(ImportExportModelAdmin,admin.ModelAdmin):
+    resource_class = DirectorioResources
+    list_display = (
+        'diresa',
         'documento_identidad',
         'apellido_paterno',
         'apellido_materno',

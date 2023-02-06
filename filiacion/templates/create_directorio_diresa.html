@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+<main class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 text-center py-1">
+        <h1>Crear Responsable de Directorio</h1>
+      </div>
+      <div class="col-md-6 offset-md-3">
+        {{error}}
+        <section class="card card-body">
+          <form action="/filiacion/create/" method="POST"  enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form }}
+              </br>
+              <button class="btn btn-success"><i class="fa fa-save"></i> Grabar</button>
+          </form>
+        </section>
+      </div> 
+    </div>
+</main>
+
+{% endblock %}
