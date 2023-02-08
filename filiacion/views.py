@@ -8,8 +8,9 @@ from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
-from .forms import FiliacionForm, DirectorioForm
-from .models import Filiacion, Directorio,Provincia, Distrito, Red, Microred, Establecimiento
+from .forms import FiliacionForm, DirectorioForm, DirectorioRedForm, DirectorioEstablecimientoForm
+from .models import Filiacion, Directorio, DirectorioRed, DirectorioEstablecimiento, Provincia, Distrito, Red, Microred, Establecimiento
+from django.db.models import Q
 
 def home(request):
     return render(request, 'home.html')
@@ -87,7 +88,7 @@ def create_directorio_diresa(request):
             form = DirectorioForm(request.POST, request.FILES)
             new_directorio = form.save(commit=False)
             new_directorio.save()
-            return redirect('create_directorio_diresa')
+            return redirect('directorio_salud')
         except ValueError:
             return render(request, 'create_directorio_diresa.html', {
                 "form": DirectorioForm,
@@ -113,23 +114,118 @@ def directorio_diresa_detail(request, directorio_diresa_id):
         except ValueError:
             return render(request, 'directorio_diresa_detail.html', {'directorio_diresa': directorio_diresa, 'form': form, 'error': 'Error actualizar'})
 
+@login_required
+def delete_directorio_diresa(request, directorio_diresa_id):
+    directorio = get_object_or_404(Directorio, pk=directorio_diresa_id)
+    if request.method == 'POST':
+        directorio.delete()
+        return redirect('directorio_salud')
+
 # ----- DIRECTORIO SALUD RED --------------------
 @login_required
 def directorio_red(request):
-    directorio_red = Directorio.objects.all()
+    directorio_redes = DirectorioRed.objects.all()
     context = {
-                'directorio_red': directorio_red,
+                'directorio_redes': directorio_redes,
                 }
     return render(request, 'directorio_red.html', context)
 
+@login_required
+def create_directorio_red(request):
+    if request.method == "GET":
+        return render(request, 'create_directorio_red.html', {
+            "form": DirectorioRedForm
+        })
+    else:
+        try:
+            form = DirectorioRedForm(request.POST, request.FILES)
+            new_directorio_red = form.save(commit=False)
+            new_directorio_red.save()
+            return redirect('directorio_red')
+        except ValueError:
+            return render(request, 'create_directorio_red.html', {
+                "form": DirectorioRedForm,
+                "error": "Error creating task."
+            })
+
+@login_required
+def directorio_red_detail(request, directorio_red_id):
+    if request.method == 'GET':
+        directorio_red = get_object_or_404(DirectorioRed, pk=directorio_red_id)
+        form = DirectorioRedForm(instance=directorio_red)
+        context = {
+            'directorio_red': directorio_red,
+            'form': form
+        }
+        return render(request, 'directorio_red_detail.html', context)
+    else:
+        try:
+            directorio_red = get_object_or_404(DirectorioRed, pk=directorio_red_id)
+            form = DirectorioRedForm(request.POST,request.FILES, instance=directorio_red)
+            form.save()
+            return redirect('directorio_red')
+        except ValueError:
+            return render(request, 'directorio_red_detail.html', {'directorio_red': directorio_red, 'form': form, 'error': 'Error actualizar'})
+
+@login_required
+def delete_directorio_red(request, directorio_red_id):
+    directorio_red = get_object_or_404(DirectorioRed, pk=directorio_red_id)
+    if request.method == 'POST':
+        directorio_red.delete()
+        return redirect('directorio_red')
+
 # ----- DIRECTORIO SALUD ESTABLECIMIENTO --------------------
+@login_required
 def directorio_establecimiento(request):
-    directorio_establecimiento = Directorio.objects.all()
+    directorio_establecimientos = DirectorioEstablecimiento.objects.all()
     context = {
-                'directorio_establecimiento': directorio_establecimiento,
+                'directorio_establecimientos': directorio_establecimientos,
                 }
     return render(request, 'directorio_establecimiento.html', context)
 
+@login_required
+def create_directorio_establecimiento(request):
+    if request.method == "GET":
+        return render(request, 'create_directorio_establecimiento.html', {
+            "form": DirectorioEstablecimientoForm
+        })
+    else:
+        try:
+            form = DirectorioEstablecimientoForm(request.POST, request.FILES)
+            new_directorio_establecimiento = form.save(commit=False)
+            new_directorio_establecimiento.save()
+            return redirect('directorio_establecimiento')
+        except ValueError:
+            return render(request, 'create_directorio_establecimiento.html', {
+                "form": DirectorioEstablecimientoForm,
+                "error": "Error creating task."
+            })
+
+@login_required
+def directorio_establecimiento_detail(request, directorio_establecimiento_id):
+    if request.method == 'GET':
+        directorio_establecimiento = get_object_or_404(DirectorioEstablecimiento, pk=directorio_establecimiento_id)
+        form = DirectorioEstablecimientoForm(instance=directorio_establecimiento)
+        context = {
+            'directorio_establecimiento': directorio_establecimiento,
+            'form': form
+        }
+        return render(request, 'directorio_establecimiento_detail.html', context)
+    else:
+        try:
+            directorio_establecimiento = get_object_or_404(DirectorioEstablecimiento, pk=directorio_establecimiento_id)
+            form = DirectorioEstablecimientoForm(request.POST,request.FILES, instance=directorio_establecimiento)
+            form.save()
+            return redirect('directorio_establecimiento')
+        except ValueError:
+            return render(request, 'directorio_establecimiento_detail.html', {'directorio_establecimiento': directorio_establecimiento, 'form': form, 'error': 'Error actualizar'})
+
+@login_required
+def delete_directorio_establecimiento(request, directorio_establecimiento_id):
+    directorio_establecimiento = get_object_or_404(DirectorioEstablecimiento, pk=directorio_establecimiento_id)
+    if request.method == 'POST':
+        directorio_establecimiento.delete()
+        return redirect('directorio_establecimiento')
 
 # ----- INICIO DE SESION --------------------------------
 @login_required
@@ -196,3 +292,17 @@ def frontend_directorio_diresa(request):
             'directorio_diresas': directorio_diresas,
             }
     return render(request, 'frontend/directorio_diresa.html', context)
+
+def frontend_directorio_red(request):
+    directorio_redes= DirectorioRed.objects.all()
+    context = {
+            'directorio_redes': directorio_redes,
+            }
+    return render(request, 'frontend/directorio_red.html', context)
+
+def frontend_directorio_establecimiento(request):
+    directorio_establecimientos= DirectorioEstablecimiento.objects.all()
+    context = {
+            'directorio_establecimientos': directorio_establecimientos,
+            }
+    return render(request, 'frontend/directorio_establecimiento.html', context)

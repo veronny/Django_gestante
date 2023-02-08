@@ -2,7 +2,7 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
 from django.contrib import admin
-from .models import Filiacion, Red, Microred, Establecimiento, Provincia, Distrito, Directorio
+from .models import Filiacion, Red, Microred, Establecimiento, Provincia, Distrito, Directorio, DirectorioRed, DirectorioEstablecimiento
 
 # Register your models here.
 
@@ -94,7 +94,7 @@ class FiliacionAdmin(ImportExportModelAdmin,admin.ModelAdmin):
     )
     search_fields = ('nombres',)
  
-#--------------DIRECTORIO DE MUNICIPIO --------------------------
+#--------------DIRECTORIO DE DIRESA --------------------------
 class DirectorioResources(resources.ModelResource):
     class Meta:
         model = Directorio
@@ -104,6 +104,52 @@ class DirectorioAdmin(ImportExportModelAdmin,admin.ModelAdmin):
     resource_class = DirectorioResources
     list_display = (
         'diresa',
+        'documento_identidad',
+        'apellido_paterno',
+        'apellido_materno',
+        'nombres',
+        'telefono',
+        'correo_electronico',
+        'condicion',
+        'cuenta_usuario'
+    )
+    search_fields = ('nombres',)
+    
+#--------------DIRECTORIO DE REDES --------------------------
+class DirectorioRedResources(resources.ModelResource):
+    class Meta:
+        model = DirectorioRed
+
+@admin.register(DirectorioRed)
+class DirectorioRedAdmin(ImportExportModelAdmin,admin.ModelAdmin):
+    resource_class = DirectorioRedResources
+    list_display = (
+        'diresa',
+        'red',
+        'documento_identidad',
+        'apellido_paterno',
+        'apellido_materno',
+        'nombres',
+        'telefono',
+        'correo_electronico',
+        'condicion',
+        'cuenta_usuario'
+    )
+    search_fields = ('nombres',)
+
+#--------------DIRECTORIO DE ESTABLECIMIENTO --------------------------
+class DirectorioEstablecimientoResources(resources.ModelResource):
+    class Meta:
+        model = DirectorioEstablecimiento
+
+@admin.register(DirectorioEstablecimiento)
+class DirectorioEstablecimientoAdmin(ImportExportModelAdmin,admin.ModelAdmin):
+    resource_class = DirectorioEstablecimientoResources
+    list_display = (
+        'diresa',
+        'red',
+        'microred',
+        'establecimiento',
         'documento_identidad',
         'apellido_paterno',
         'apellido_materno',
