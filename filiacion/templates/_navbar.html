@@ -12,28 +12,36 @@
         <li class="nav-item">
           <a href="/" class="nav-link">Inicio</a>
         </li>
-        {% if user.is_authenticated %}
+          {% if perms.filiacion.view_filiacion and user.is_authenticated %}
           <li class="nav-item">
             <a href="/filiacion" class="nav-link">Dir. Municipios</a>
           </li>
+          {% endif %}
+          {% if perms.filiacion.view_red and user.is_authenticated %}  
           <li class="nav-item">
             <a href="/directorio_salud" class="nav-link">Dir. Diresa</a>
           </li>
+          {% endif %}
+          {% if perms.filiacion.view_red and user.is_authenticated %}
           <li class="nav-item">
             <a href="/directorio_red" class="nav-link">Dir. Redes</a>
           </li>
+          {% endif %}
+          {% if perms.filiacion.view_establecimiento and user.is_authenticated %}
           <li class="nav-item">
             <a href="/directorio_establecimiento" class="nav-link">Dir. Establecimientos</a>
           </li>
+          {% endif %}
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-user-circle"></i> {{ user.username }}</a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li><a class="dropdown-item" href="/logout"> Salir</a></li>
+              </ul>
+          </li>    
+          {% else %}
           <li class="nav-item">
-            <a href="#" class="nav-link">Indicadores</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Salir</a>
-          </li>
-        {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="/signin">Ingresar</a>
+            <a href="/signin" class="nav-link" >Ingresar</a>
           </li>
         {% endif %}
       </ul>
